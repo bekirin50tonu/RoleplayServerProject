@@ -1,0 +1,191 @@
+basePath: /api/user
+definitions:
+  dto.LoginUserRequestDto:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  dto.LoginUserResponseDTO:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    type: object
+  dto.RegisterUserRequestDTO:
+    properties:
+      email:
+        type: string
+      lastname:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - lastname
+    - name
+    - password
+    - username
+    type: object
+  dto.SwaggerPayload-any-any:
+    properties:
+      data: {}
+      meta: {}
+    type: object
+  dto.SwaggerPayload-dto_WhoAmIResponseDto-any:
+    properties:
+      data: {}
+      meta:
+        $ref: '#/definitions/dto.WhoAmIResponseDto'
+    type: object
+  dto.SwaggerSuccessResponse-any-any:
+    properties:
+      message:
+        type: string
+      payload:
+        $ref: '#/definitions/dto.SwaggerPayload-any-any'
+      success:
+        type: boolean
+    type: object
+  dto.SwaggerSuccessResponse-dto_WhoAmIResponseDto-any:
+    properties:
+      message:
+        type: string
+      payload:
+        $ref: '#/definitions/dto.SwaggerPayload-dto_WhoAmIResponseDto-any'
+      success:
+        type: boolean
+    type: object
+  dto.WhoAmIResponseDto:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: This is a Documentation from User Service
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: User App Service
+  version: "1.0"
+paths:
+  /login:
+    post:
+      description: test deneme
+      parameters:
+      - description: body参数
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginUserRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok" "返回用户信息
+          schema:
+            $ref: '#/definitions/dto.LoginUserResponseDTO'
+        "400":
+          description: err_code：10002 参数错误； err_code：10003 校验错误
+          schema:
+            type: string
+        "401":
+          description: err_code：10001 登录失败
+          schema:
+            type: string
+        "500":
+          description: err_code：20001 服务错误；err_code：20002 接口错误；err_code：20003 无数据错误；err_code：20004
+            数据库异常；err_code：20005 缓存异常
+          schema:
+            type: string
+      summary: Login With Given Credentials.
+  /me:
+    get:
+      description: '@Me Endpoint.'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok" "返回用户信息
+          schema:
+            $ref: '#/definitions/dto.SwaggerSuccessResponse-dto_WhoAmIResponseDto-any'
+        "400":
+          description: err_code：10002 参数错误； err_code：10003 校验错误
+          schema:
+            type: string
+        "401":
+          description: err_code：10001 登录失败
+          schema:
+            type: string
+        "500":
+          description: err_code：20001 服务错误；err_code：20002 接口错误；err_code：20003 无数据错误；err_code：20004
+            数据库异常；err_code：20005 缓存异常
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Gives All Tokens with Refresh.
+  /register:
+    post:
+      description: Register Endpoint.
+      parameters:
+      - description: Enter Credential.
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegisterUserRequestDTO'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: ok" "返回用户信息
+          schema:
+            $ref: '#/definitions/dto.SwaggerSuccessResponse-any-any'
+        "400":
+          description: err_code：10002 参数错误； err_code：10003 校验错误
+          schema:
+            type: string
+        "401":
+          description: err_code：10001 登录失败
+          schema:
+            type: string
+        "500":
+          description: err_code：20001 服务错误；err_code：20002 接口错误；err_code：20003 无数据错误；err_code：20004
+            数据库异常；err_code：20005 缓存异常
+          schema:
+            type: string
+      summary: Register With Given Credentials.
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: X-Token
+    type: apiKey
+swagger: "2.0"
