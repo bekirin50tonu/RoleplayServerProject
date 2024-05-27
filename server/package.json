@@ -1,0 +1,36 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "type": "module",
+  "scripts": {
+    "update": "altv-pkg d release"
+  },
+  "keywords": [
+    "gta5",
+    "roleplay"
+  ],
+  "author": "bekirin50tonu",
+  "license": "ISC",
+  "devDependencies": {
+    "@altv/types-client": "^1.7.6",
+    "@altv/types-natives": "^1.4.2",
+    "@altv/types-server": "^1.9.6",
+    "@altv/types-shared": "^1.0.1",
+    "@altv/types-webview": "^1.0.2",
+    "altv-pkg": "^1.2.0",
+    "prettier": "^1.18.2"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "bracketSpacing": true
+  },
+  "dependencies": {
+    "axios": "^1.6.5",
+    "fkill": "^8.1.0",
+    "toml": "^3.0.0"
+  }
+}
