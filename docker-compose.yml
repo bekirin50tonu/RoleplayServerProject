@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  user-service:
+    container_name: user
+    build: 
+      dockerfile: ./services/cmd/user/DOCKERFILE
+    ports:
+      - "8080:5000"
+
+  storage-service:
+    container_name: storage
+    build: 
+      dockerfile: ./services/cmd/storage/DOCKERFILE
+    ports:
+      - "8081:5000"
+    volumes:
+      - "./services/storage:/usr/src/storage/storage"
+
+
+  api-gateway:
+    container_name: gateway
+    image: nginx:latest
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - user-service
+      - storage-service
+
+    

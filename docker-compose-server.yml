@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  server:
+    container_name: keneveristan
+    build:
+      dockerfile: ./server/DOCKERFILE
+    ports:
+      - "7788:7788"
+      - "7788:7788/udp"
+    environment:
+      - "./server/.env"
+    volumes:
+      - ./server/node_modules:/usr/src/server/node_modules
+      - ./server/resources:/usr/src/server/resources
+
+    
